@@ -1,0 +1,17 @@
+describe('HSBC Login Test Scenario', () => {
+  it('passes', () => {
+    cy.visit('https://www.hsbc.co.in/')
+    cy.get('[alt="HSBC India Bank"]')
+    cy.contains('HSBC')
+    cy.title().should('eq','HSBC India - Credit Cards, NRI Services, Saving and Deposit')
+    cy.contains('Log On').click({force: true})
+    cy.contains('Log On').should('be.visible')
+    cy.contains('button','Continue').should('be.disabled')
+    cy.contains('Please enter your username').type('souvik@sharma.com')
+    cy.contains('button','Continue').should('not.be.disabled')
+    cy.contains('Remember me').should('not.checked')
+    cy.get('[class="help-link-on-page pull-right"]',{timeout:10000}).should('exist').click({force: true})
+    cy.contains('Username')
+    cy.get('[class="icon icon-delete"]').click()
+  })
+})
